@@ -180,13 +180,12 @@ type PostError struct {
 }
 
 // The RGL type contains all endpoints as methods. Create one with rgl.DefaultRateLimit()
-// or use RGL{rl: *rate.Limiter}
-// or use RGL{} if you don't want to use the ratelimiter object at all (you will have to implement your own)
+// or use RGL{} if you don't want to use the ratelimiter (you will have to implement your own, as the rgl api is heavily limited)
 type RGL struct {
 	rl *rate.Limiter
 }
 
-// Create an RGL instance with a default rate limiter based on present ratelimits (2 calls per 1 second)>
+// Create an RGL instance with a default rate limiter based on present ratelimits (2 calls per 1 second)
 func DefaultRateLimit() RGL {
 	r := RGL{}
 	r.rl = rate.NewLimiter(rate.Every(time.Second), 2) //2 requests every second
